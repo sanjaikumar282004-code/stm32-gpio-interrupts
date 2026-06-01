@@ -46,32 +46,47 @@ Button Pressed?
 
 ### 3. GPIO_EXTI_PC13
 
-Generate an external interrupt using the onboard user button and toggle LD2.
+Generate an external interrupt using the onboard user button (PC13) and toggle LD2.
 
 #### Flow Diagram
 
 ```text
+System Start
+      │
+      ▼
 Initialize UART
-        ↓
+      │
+      ▼
 Configure PC13 as EXTI Source
-        ↓
-Enable NVIC Interrupt
-        ↓
+      │
+      ▼
+Enable EXTI13 Interrupt in NVIC
+      │
+      ▼
 Main Loop Running
-        ↓
-Print "Normal..."
-        ↓
-User Presses Button
-        ↓
+      │
+      ├────► Print "Normal..."
+      │
+      ▼
+User Presses PC13 Button
+      │
+      ▼
 EXTI13 Interrupt Generated
-        ↓
+      │
+      ▼
 EXTI15_10_IRQHandler()
-        ↓
+      │
+      ▼
 Clear Pending Flag
-        ↓
-Toggle LD2
-        ↓
+      │
+      ▼
+Toggle LD2 (PA5)
+      │
+      ▼
 Print "Interrupt Occured..."
+      │
+      ▼
+Return to Main Loop
 ```
 
 #### Output
@@ -81,6 +96,7 @@ Output screenshot is available in:
 ```text
 GPIO_EXTI_PC13/Output.png
 ```
+
 
 ## Concepts Learned
 
